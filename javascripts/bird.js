@@ -65,7 +65,7 @@ function Bird() {
 			sprite.velocity.y = 0;
 		}
 		//if in water 
-		if(sprite.position.y > water.y) {
+		if(sprite.position.y > height/2) {
 			
 			//velocity water
 			sprite.velocity.y *= 0.8;

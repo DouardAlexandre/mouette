@@ -1,7 +1,7 @@
 
 
 
-var water;
+
 var bird;
 var pipes =[];
 var clouds;
@@ -31,7 +31,6 @@ function preload() {
 function setup() {
 
 	createCanvas(1200, 600);
-	water = new Water();
 	clouds = new Group();
 	plants = new Group();
 
@@ -86,9 +85,7 @@ function setup() {
 
 
 function draw() {
-	//background(52, 152, 219);
-	water.update();
-	water.show();
+	
 	drawSprites(clouds);
 
 	//sky scroll
@@ -127,7 +124,7 @@ function draw() {
 	  	if(plants[i].position.x < -50) {
 	  		plants[i].position.x = width;
 	  	}
-	  	if (sprite.position.y > water.y) {		
+	  	if (sprite.position.y > height/2) {		
 	  		plants[i].position.x -= 12;
 	  	} else {
 	  		  //move left
@@ -148,7 +145,7 @@ function draw() {
 	  bird.update();
 	  drawSprites();
 	//bird in water
-	if(sprite.position.y > (water.y -20)) {
+	if(sprite.position.y > height/2) {
 		particules.show();
 		particules.update();
 	//bird in sky	
