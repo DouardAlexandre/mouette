@@ -4,7 +4,7 @@ var sprite;
 
 function Bird() {
 
-	this.y = 80;    //heigth/4
+	this.y = 80;    
 	this.x = 164;
 	
 	this.show = function() {
