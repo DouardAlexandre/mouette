@@ -1,9 +1,10 @@
 html{
-	background-color: black;
+	background-image: url('../images/navy_blue.png');
+	background-repeat: repeat;
 }
 canvas#defaultCanvas0 { 
 	position:fixed; 
-	top:20rem; 
+	top:3rem; 
 	left:10rem; 
 }
 
