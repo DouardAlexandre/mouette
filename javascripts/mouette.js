@@ -50,18 +50,18 @@ function setup() {
     
     //seaweed
    /* var seaweed = createSprite(width,height);
-    seaweed.addImage(plant);*/
+   seaweed.addImage(plant);*/
 
     //assign sprite plant to plants
-    for(var i = 0; i<5; i++) {
+    for(var i = 0; i<10; i++) {
     	var seaweed = createSprite(width+random(1500),(height-random(50)), 148, 94);
     	seaweed.addImage(plant);
     	plants.add(seaweed);
 
     }
 	//assign sprite cloud to clouds
-	for(var i = 0; i<5; i++) {
-		var spriteCloud = createSprite(width+random(2000), random(height/4), 172, 67);
+	for(var i = 0; i<12; i++) {
+		var spriteCloud = createSprite(width+random(2000), random(60,210), 172, 67);
 		spriteCloud.addAnimation("default", nuage);
 		//spriteCloud.scale = random(0.9);
 		clouds.add(spriteCloud);
@@ -120,25 +120,34 @@ function draw() {
 
     //seaweeds
     for(var i = 0; i < plants.length; i++) {
-	 
-	  	if(plants[i].position.x < -50) {
-	  		plants[i].position.x = width;
-	  	}
-	  	if (sprite.position.y > height/2) {		
-	  		plants[i].position.x -= 12;
-	  	} else {
+
+    	if(plants[i].position.x < -50) {
+    		plants[i].position.x = width+random(1500);
+    		plants[i].position.y = height-random(50);
+    	}
+    	if (sprite.position.y > height/2) {		
+    		plants[i].position.x -= 20;
+
+    	} else {
 	  		  //move left
-	  		plants[i].position.x -= 3;
+	  		  plants[i].position.x -= 3;
+	  		}
 	  	}
-	  	
-	  }
 	//clouds
 	for(var i = 0; i < clouds.length; i++) {
 	    //move left
-	    clouds[i].position.x -= 2.5;
+	    
 	  	//overflow left
 	  	if(clouds[i].position.x < -100) {
-	  		clouds[i].position.x = width;
+	  		clouds[i].position.x = width+random(2000);
+	  		clouds[i].position.y = random(60,210);
+	  	}
+	  	if (sprite.position.y > height/2) {		
+	  		clouds[i].position.x -= 15;
+	  		
+	  	} else {
+	  		//move left
+	  		clouds[i].position.x -= 2.5;
 	  	}
 	  	
 	  }
@@ -153,13 +162,13 @@ function draw() {
 	waterStream.Draw();
 	waterStream.Step();
 }
-    
-    if (mouseIsPressed) {
-    	bird.down();
-    	
-    }else{
-    	bird.up();
-    }
+
+if (mouseIsPressed) {
+	bird.down();
+
+}else{
+	bird.up();
+}
 
 
 }//end draw

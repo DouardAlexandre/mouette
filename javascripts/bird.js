@@ -8,7 +8,7 @@ function Bird() {
 	this.x = 164;
 	
 	this.show = function() {
-	
+
 
 	}//ens show
 
@@ -32,17 +32,27 @@ function Bird() {
 
 		if (mouseIsPressed) {
 			sprite.animation.changeFrame(1);
-			sprite.rotation = 40;
-			sprite.rotation += 1.3;
-			if(sprite.rotation>40){
-				sprite.rotation = 40;
-			} 
-			
-			
+			sprite.rotation += 2.5;
+			if(sprite.rotation>50){
+				sprite.rotation = 50;
+			} 	
+			if(sprite.position.y > height-170){
+				sprite.rotation -= 3.2;
+				if(sprite.rotation<-10){
+					sprite.rotation = -10;
+				} 			
+			}	
+			if(sprite.position.y > height/2 && sprite.position.y < height-170 ){
+				//sprite.rotation = 0;
+				sprite.rotation += 5.5;
+				if(sprite.rotation>40){
+					sprite.rotation = 40;
+				} 	
+			}	
+
 		}else{
 			if(sprite.position.y < 80){
 				sprite.animation.play();
-				//spr.rotation = -40;
 				sprite.rotation = 0;
 			} else {
 				//sprite.animation.changeFrame(1);
@@ -55,8 +65,8 @@ function Bird() {
 
 
         //block bottom
-        if(sprite.position.y > height-50) {
-        	sprite.position.y = height-50;
+        if(sprite.position.y > height-10) {
+        	sprite.position.y = height-10;
         	sprite.velocity.y = 0;
         }
 		//block top
