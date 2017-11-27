@@ -49,12 +49,12 @@ function setup() {
     sea.addImage(wave);
     
     //seaweed
-    var seaweed = createSprite(width,height/1.20);
-    seaweed.addImage(plant);
+   /* var seaweed = createSprite(width,height);
+    seaweed.addImage(plant);*/
 
     //assign sprite plant to plants
     for(var i = 0; i<5; i++) {
-    	var seaweed = createSprite(width+random(3000),(height-random(height/5)), 148, 94);
+    	var seaweed = createSprite(width+random(1500),(height-random(50)), 148, 94);
     	seaweed.addImage(plant);
     	plants.add(seaweed);
 
