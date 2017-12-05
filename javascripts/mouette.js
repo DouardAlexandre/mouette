@@ -15,6 +15,8 @@ var parallax;
 var wave;
 var sea,sea2, sea3;
 
+var SCENE_H = 1200;
+
 function preload() {
 
 	sky = loadImage("images/sky.png");
@@ -43,7 +45,7 @@ function setup() {
     //sea
     sea3 = createSprite(width,height/1.20);
     sea2 = createSprite(width,height/1.3);
-    sea = createSprite(width,height/1.34);
+    sea = createSprite(width,height+95);
     sea3.addImage(wave3);
     sea2.addImage(wave2);
     sea.addImage(wave);
@@ -54,7 +56,7 @@ function setup() {
 
     //assign sprite plant to plants
     for(var i = 0; i<10; i++) {
-    	var seaweed = createSprite(width+random(1500),(height-random(50)), 148, 94);
+    	var seaweed = createSprite(width+random(1500),(SCENE_H-random(50)), 148, 94);
     	seaweed.addImage(plant);
     	plants.add(seaweed);
 
@@ -79,14 +81,34 @@ function setup() {
 	particules = new Particule();
 	particules.setup();
 	//opacity wave
-	sea4 = createSprite(width,height/1.34);
+	sea4 = createSprite(width,height+95);
 	sea4.addImage(wave4);
+
+	compteur = createSprite(sprite.position.x, sprite.position.y);
+
+
 }
 
 
 function draw() {
-	
+	background(0, 0, 0); 
 	drawSprites(clouds);
+
+	
+
+	compteur.draw = function() { 
+
+		noStroke();  
+		fill(204, 101, 192, 127);
+		/*stroke(127, 63, 120);*/
+		rect(sprite.position.x-170, sprite.position.y-140 , 100, 15, 8);
+
+	}
+	
+	
+
+
+
 
 	//sky scroll
 	parallax.position.x -= 1.5;
@@ -116,14 +138,17 @@ function draw() {
     if(sea4.position.x <= 0){
     	sea4.position.x = width;  	
     }
-
+    if(sprite.position.y > SCENE_H-315){
+    	sprite.position.y = SCENE_H-315;
+    }
+    
 
     //seaweeds
     for(var i = 0; i < plants.length; i++) {
 
     	if(plants[i].position.x < -50) {
     		plants[i].position.x = width+random(1500);
-    		plants[i].position.y = height-random(50);
+    		plants[i].position.y = SCENE_H-random(50);
     	}
     	if (sprite.position.y > height/2) {		
     		plants[i].position.x -= 20;
@@ -157,6 +182,8 @@ function draw() {
 	if(sprite.position.y > height/2) {
 		particules.show();
 		particules.update();
+
+		camera.position.y = sprite.position.y;
 	//bird in sky	
 } else {
 	waterStream.Draw();
@@ -170,7 +197,7 @@ if (mouseIsPressed) {
 	bird.up();
 }
 
-
+camera.off();
 }//end draw
 
 
