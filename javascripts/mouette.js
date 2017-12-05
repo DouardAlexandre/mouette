@@ -84,7 +84,7 @@ function setup() {
 	sea4 = createSprite(width,height+95);
 	sea4.addImage(wave4);
 
-	compteur = createSprite(sprite.position.x, sprite.position.y);
+	compteur = createSprite(bird.x, bird.y);
 
 
 }
@@ -101,7 +101,7 @@ function draw() {
 		noStroke();  
 		fill(204, 101, 192, 127);
 		/*stroke(127, 63, 120);*/
-		rect(sprite.position.x-170, sprite.position.y-140 , 100, 15, 8);
+		rect(bird.x-170, bird.y-140 , 100, 15, 8);
 
 	}
 	

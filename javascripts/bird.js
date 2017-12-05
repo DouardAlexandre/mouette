@@ -25,13 +25,14 @@ function Bird() {
 
 	this.update = function() {
 
-
+		compteur.position.y = sprite.position.y;
 		//limit up speed air resistance
 		sprite.velocity.y *= 1;
 		
 
 		if (mouseIsPressed) {
-			compteur.position.y = sprite.position.y;
+			
+
 			sprite.animation.changeFrame(1);
 			//fall
 			sprite.rotation += 3.2;
@@ -39,7 +40,7 @@ function Bird() {
 			if(sprite.rotation>66 ){
 				sprite.rotation = 66;
 			} 	
-		
+			
 			//arrondi
 			if( sprite.position.y > 560 && sprite.rotation >=41){
 				
