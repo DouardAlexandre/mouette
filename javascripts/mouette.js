@@ -35,6 +35,7 @@ function setup() {
 	createCanvas(1200, 600);
 	clouds = new Group();
 	plants = new Group();
+	bubbles = new Group();
 
 	//sky scroll
 	parallax = createSprite(0,0);
@@ -69,8 +70,35 @@ function setup() {
 		clouds.add(spriteCloud);
 		
 	}
-
-
+    //create bubbles
+    for(var i = 0; i<18; i++) {
+    	spritebubbles = createSprite(random(width), 300+random(height));
+    	spritebubbles.draw = function() { 
+    		noStroke();  
+    		fill(135,206,250, 227);
+    		ellipse(this.width,this.height, i*1.5);
+    		/*//scale affects the size of the collider
+    		spritebubbles.scale = random(0.5, 5);*/
+            //mass determines the force exchange in case of bounce
+            spritebubbles.mass = spritebubbles.scale;
+        }
+        spritebubbles.setSpeed(random(2,3), random(0, 360));
+        bubbles.add(spritebubbles);
+    }
+for(var i = 0; i<18; i++) {
+    	spritebubbles = createSprite(random(width), 300+random(height));
+    	spritebubbles.draw = function() { 
+    		noStroke();  
+    		fill(70,130,180, 127);
+    		ellipse(this.width,this.height, i*2.2);
+    		/*//scale affects the size of the collider
+    		spritebubbles.scale = random(0.5, 5);*/
+            //mass determines the force exchange in case of bounce
+            spritebubbles.mass = spritebubbles.scale;
+        }
+        spritebubbles.setSpeed(random(2,3), random(0, 360));
+        bubbles.add(spritebubbles);
+    }
 	//pipes.push(pipe);
 	
 	//bird
@@ -87,25 +115,57 @@ function setup() {
 	compteur = createSprite(bird.x, bird.y);
 
 
+	
+	//waterSprite = createSprite(water.x, water.y);
+
 }
 
 
 function draw() {
+
 	background(0, 0, 0); 
+
 	drawSprites(clouds);
 
+
 	
 
-	compteur.draw = function() { 
+    //bounce bubbles
+    for(var i=0; i<bubbles.length; i++) {
+    	var s = bubbles[i];
+    	if(s.position.x<0) {
+    		s.position.x = 1;
+    		s.velocity.x = abs(s.velocity.x);
+    	}
 
-		noStroke();  
-		fill(204, 101, 192, 127);
-		/*stroke(127, 63, 120);*/
-		rect(bird.x-170, bird.y-140 , 100, 15, 8);
+    	if(s.position.x>width) {
+    		s.position.x = width-1;
+    		s.velocity.x = -abs(s.velocity.x);
+    	}
 
-	}
-	
-	
+    	if(s.position.y<200) {
+    		s.position.y = 201;
+    		s.velocity.y = abs(s.velocity.y);
+    	}
+
+    	if(s.position.y>SCENE_H) {
+    		s.position.y = SCENE_H-1;
+    		s.velocity.y = -abs(s.velocity.y);
+    	} 
+    }
+
+
+
+
+    //compteur O2
+    compteur.draw = function() { 
+    	noStroke();  
+    	fill(65,105,225, 127);
+    	rect(bird.x-170, bird.y-140 , 100, 15, 8);
+
+    }
+
+
 
 
 
@@ -196,6 +256,17 @@ if (mouseIsPressed) {
 }else{
 	bird.up();
 }
+
+
+
+
+
+
+
+
+
+
+
 
 camera.off();
 }//end draw
