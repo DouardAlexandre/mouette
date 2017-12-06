@@ -15,8 +15,9 @@ var parallax;
 var wave;
 var sea,sea2, sea3;
 var canvas;
-
+var compteurWidth = 100;
 var SCENE_H = 1200;
+var gameOver;
 
 function preload() {
 
@@ -33,7 +34,7 @@ function preload() {
 
 
 function setup() {
-        
+
 	canvas = createCanvas(1200, 600);
 	centerCanvas();
 	clouds = new Group();
@@ -88,7 +89,7 @@ function setup() {
         spritebubbles.setSpeed(random(2,3), random(0, 360));
         bubbles.add(spritebubbles);
     }
-for(var i = 0; i<18; i++) {
+    for(var i = 0; i<18; i++) {
     	spritebubbles = createSprite(random(width), 300+random(height));
     	spritebubbles.draw = function() { 
     		noStroke();  
@@ -115,23 +116,38 @@ for(var i = 0; i<18; i++) {
 	sea4 = createSprite(width,height+95);
 	sea4.addImage(wave4);
 
-	compteur = createSprite(bird.x, bird.y);
 
 
 	
-	//waterSprite = createSprite(water.x, water.y);
-
-}
-
-
-function draw() {
-
-	background(0, 0, 0); 
-
-	drawSprites(clouds);
-
-
 	
+	 //compteur O2
+	 compteur = createSprite(bird.x, bird.y);
+	 compteur.draw = function() {
+	 	if(sprite.position.y > height/2) {
+	 		timer();
+	 	} 
+	 }
+
+
+
+
+
+
+	}
+
+
+	function draw() {
+
+		background(0, 0, 0); 
+
+		drawSprites(clouds);
+
+		push();
+		compteur.width -= 50;
+		pop();
+
+		
+
 
     //bounce bubbles
     for(var i=0; i<bubbles.length; i++) {
@@ -156,19 +172,6 @@ function draw() {
     		s.velocity.y = -abs(s.velocity.y);
     	} 
     }
-
-
-
-
-    //compteur O2
-    compteur.draw = function() { 
-    	noStroke();  
-    	fill(65,105,225, 127);
-    	rect(bird.x-170, bird.y-140 , 100, 15, 8);
-
-    }
-
-
 
 
 
@@ -239,46 +242,77 @@ function draw() {
 	  	}
 	  	
 	  }
+
 	  bird.update();
 	  drawSprites();
-	//bird in water
-	if(sprite.position.y > height/2) {
-		particules.show();
-		particules.update();
+
+	  //bird in water fountain particules
+	  if(camera.position.y > 320 ) {
+
+	  	particules.show();
+	  	
+	  } else {
+	  	
+	        //bird in sky	
+	        waterStream.Draw();
+	    	//remanence + draw nothing
+	    	waterStream.Step();
+
+
+	    }
+	//camera
+	if(sprite.position.y > height/2 ) {
 
 		camera.position.y = sprite.position.y;
-	//bird in sky	
-} else {
-	waterStream.Draw();
-	waterStream.Step();
-}
 
-if (mouseIsPressed) {
-	bird.down();
+	} 
 
-}else{
-	bird.up();
-}
+	if(sprite.position.y === 80 ) {
 
+		compteurWidth = 100;
 
+	} 
 
-
-
-
-
-
-
-
-
-
-camera.off();
-}//end draw
-function centerCanvas() {
-	  var x = (windowWidth - width) / 2;
-	  var y = (windowHeight - height) / 2;
-	  canvas.position(x, y);
+	if (mouseIsPressed) {
+		bird.down();
+	}else{
+		bird.up();
 	}
+
+
+
+
+
+
+
+	camera.off();
+}//end draw
+
+
+
+function timer() {
+	
+	fill(65,105,225, 127);
+	rect(bird.x-170, bird.y-140 , compteurWidth, 15, 8);
+	compteurWidth = compteurWidth - .2;
+	if(compteurWidth<=1){
+
+		compteurWidth = 0;
+		//updateSprites(false);
+	}
+	
+}
+
+setInterval(timer, 1000); 
+
+
+
+function centerCanvas() {
+	var x = (windowWidth - width) / 2;
+	var y = (windowHeight - height) / 2;
+	canvas.position(x, y);
+}
 function windowResized() {
-  centerCanvas();
+	centerCanvas();
 }
 

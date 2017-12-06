@@ -7,10 +7,10 @@ function Particule() {
   this.y = bird.y;*/
 
   this.setup = function() {
-    //createCanvas(400, 400);
+
     var object =
     {
-      name: "test",
+      name: "water",
       colors: ["white"],
       lifetime: 90,
       angle: [200,300],
@@ -30,22 +30,13 @@ function Particule() {
 
     this.show = function() {
 
-
+      push();
       waterStream.Draw();
-      var thisx = sprite.position.x -15;
-      var thisy = sprite.position.y +20;
+      var thisx = compteur.position.x -15;
+      var thisy = compteur.position.y +20;
       waterStream.CreateN( thisx, thisy , 190);  
       waterStream.Step();
-      
-
-    }
-
-    this.update = function() {
-      push();
-      particules.show();
       pop();
-
-
     }
 
   }
