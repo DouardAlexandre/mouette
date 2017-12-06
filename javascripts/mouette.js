@@ -29,10 +29,16 @@ function preload() {
 	plant = loadImage("images/seaweed.png");
 	
 }
+function centerCanvas() {
+	  var x = (windowWidth - width) / 2;
+	  var y = (windowHeight - height) / 2;
+	  cnv.position(x, y);
+	}
 
 function setup() {
-
+        
 	createCanvas(1200, 600);
+	centerCanvas();
 	clouds = new Group();
 	plants = new Group();
 	bubbles = new Group();
@@ -270,5 +276,7 @@ if (mouseIsPressed) {
 
 camera.off();
 }//end draw
-
+function windowResized() {
+  centerCanvas();
+}
 
