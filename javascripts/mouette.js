@@ -14,6 +14,7 @@ var sky;
 var parallax;
 var wave;
 var sea,sea2, sea3;
+var canvas;
 
 var SCENE_H = 1200;
 
@@ -29,15 +30,11 @@ function preload() {
 	plant = loadImage("images/seaweed.png");
 	
 }
-function centerCanvas() {
-	  var x = (windowWidth - width) / 2;
-	  var y = (windowHeight - height) / 2;
-	  cnv.position(x, y);
-	}
+
 
 function setup() {
         
-	createCanvas(1200, 600);
+	canvas = createCanvas(1200, 600);
 	centerCanvas();
 	clouds = new Group();
 	plants = new Group();
@@ -276,6 +273,11 @@ if (mouseIsPressed) {
 
 camera.off();
 }//end draw
+function centerCanvas() {
+	  var x = (windowWidth - width) / 2;
+	  var y = (windowHeight - height) / 2;
+	  canvas.position(x, y);
+	}
 function windowResized() {
   centerCanvas();
 }
