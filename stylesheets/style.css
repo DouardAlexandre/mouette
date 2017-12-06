@@ -2,11 +2,11 @@ html{
 	background-image: url('../images/navy_blue.png');
 	background-repeat: repeat;
 }
-canvas#defaultCanvas0 { 
+/*canvas#defaultCanvas0 { 
 	position:fixed; 
 	top:3rem; 
 	left:10rem; 
-}
+}*/
 
 
 
